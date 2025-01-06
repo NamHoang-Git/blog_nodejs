@@ -5,24 +5,29 @@ import * as path from "path";
 import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
+import route from './routes/index.js'; // Import route từ thư mục routes
+
 const app = express();
 
 app.use(express.static(path.join(__dirname, "public")));
 
+// Middleware để xử lý dữ liệu từ form
+app.use(express.urlencoded({
+    extended: true
+}));
+app.use(express.json());
+
+// Cấu hình Handlebars
 app.engine("hbs", engine({
     extname: ".hbs"
 }));
 app.set("view engine", "hbs");
 app.set("views", path.join(__dirname, "resources/views"));
 
-app.get("/", (req, res) => {
-	res.render("home");
-});
+// Khởi tạo routes
+route(app); // Gọi hàm route và truyền app vào
 
-app.get("/news", (req, res) => {
-	res.render("news");
-});
-
+// Khởi động server
 app.listen(3000, () => {
-	console.log("express-handlebars example server listening on: 3000");
+    console.log("express-handlebars example server listening on: 3000");
 });
