@@ -14,7 +14,8 @@
   "description": "",
   "dependencies": {
     "express": "^4.21.0",
-    "express-handlebars": "^8.0.1"
+    "express-handlebars": "^8.0.1",
+    "mongoose": "^8.9.3"
   },
   "devDependencies": {
     "morgan": "^1.10.0",

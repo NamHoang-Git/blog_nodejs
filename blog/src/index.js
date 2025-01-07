@@ -1,15 +1,19 @@
-import express from "express";
-import { engine } from "express-handlebars"; // "express-handlebars"
+import express from 'express';
+import { engine } from 'express-handlebars'; // 'express-handlebars'
 
-import * as path from "path";
-import { fileURLToPath } from "url";
+import * as path from 'path';
+import { fileURLToPath } from 'url';
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import route from './routes/index.js'; // Import route từ thư mục routes
+import db from './config/db/index.js';
+
+// Connect to DB
+db.connect();
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, "public")));
+app.use(express.static(path.join(__dirname, 'public')));
 
 // Middleware để xử lý dữ liệu từ form
 app.use(express.urlencoded({
@@ -18,16 +22,16 @@ app.use(express.urlencoded({
 app.use(express.json());
 
 // Cấu hình Handlebars
-app.engine("hbs", engine({
-    extname: ".hbs"
+app.engine('hbs', engine({
+    extname: '.hbs'
 }));
-app.set("view engine", "hbs");
-app.set("views", path.join(__dirname, "resources/views"));
+app.set('view engine', 'hbs');
+app.set('views', path.join(__dirname, 'resources', 'views'));
 
 // Khởi tạo routes
 route(app); // Gọi hàm route và truyền app vào
 
 // Khởi động server
 app.listen(3000, () => {
-    console.log("express-handlebars example server listening on: 3000");
+    console.log('express-handlebars server listening on: 3000');
 });

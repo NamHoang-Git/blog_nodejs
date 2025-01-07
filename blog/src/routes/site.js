@@ -3,8 +3,8 @@ const router = express.Router();
 
 import siteController from '../app/controllers/SiteController.js';
 
-router.use('/search', siteController.search);
+router.get('/search', siteController.search);
 
-router.use('/', siteController.index);
+router.get('/', siteController.index);
 
 export default router;
