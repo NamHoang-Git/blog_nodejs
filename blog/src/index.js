@@ -7,6 +7,7 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 import route from './routes/index.js'; // Import route từ thư mục routes
 import db from './config/db/index.js';
+import methodOverride from 'method-override';
 
 // Connect to DB
 db.connect();
@@ -21,9 +22,14 @@ app.use(express.urlencoded({
 }));
 app.use(express.json());
 
+app.use(methodOverride('_method'))
+
 // Cấu hình Handlebars
 app.engine('hbs', engine({
-    extname: '.hbs'
+    extname: '.hbs',
+    helpers: {
+        sum: (a, b) => a + b,
+    }
 }));
 app.set('view engine', 'hbs');
 app.set('views', path.join(__dirname, 'resources', 'views'));

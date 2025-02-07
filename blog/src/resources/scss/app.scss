@@ -1,6 +1,17 @@
 @import 'variables';
 
+* {
+    font-family: 'Bahnschrift', sans-serif;
+}
+
 h2 {
     color: $blue_color;
     font-size: 1rem;
+}
+
+.user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    margin-right: 4px;
 }
